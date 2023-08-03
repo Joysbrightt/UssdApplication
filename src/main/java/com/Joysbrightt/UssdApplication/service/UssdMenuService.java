@@ -2,7 +2,7 @@ package com.Joysbrightt.UssdApplication.service;
 
 import com.Joysbrightt.UssdApplication.Dto.UssdConverter;
 import com.Joysbrightt.UssdApplication.data.UssdRepository;
-import com.Joysbrightt.UssdApplication.dto.UssdSessionDto;
+import com.Joysbrightt.UssdApplication.Dto.UssdSessionDto;
 import com.Joysbrightt.UssdApplication.model.UssdMenu;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.asm.TypeReference;

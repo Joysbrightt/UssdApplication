@@ -1,11 +1,11 @@
 package com.Joysbrightt.UssdApplication.model;
 
+import com.Joysbrightt.UssdApplication.enums.UssdMenuOptionEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
+
 public class UssdMenuOption {
         private String type;
 
@@ -14,7 +14,7 @@ public class UssdMenuOption {
         @JsonProperty("next_menu_level")
         private String nextMenuLevel;
 
-        private UssdMenuOption action;
+        private UssdMenuOptionEnum action;
 
     }
 

@@ -2,7 +2,7 @@ package com.Joysbrightt.UssdApplication.service;
 
 import com.Joysbrightt.UssdApplication.Dto.UssdConverter;
 import com.Joysbrightt.UssdApplication.data.UssdRepository;
-import com.Joysbrightt.UssdApplication.dto.UssdSessionDto;
+import com.Joysbrightt.UssdApplication.Dto.UssdSessionDto;
 import com.Joysbrightt.UssdApplication.model.UssdMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,17 +18,22 @@ import org.springframework.stereotype.Service;
         @Autowired
        private UssdSessionDto ussdSessionDto;
 
-        public UssdMenu get(String id){
-            return ussdSessionRepository.findById(id).orElse(null);
+        public UssdSessionDto get(String id){
+            UssdMenu ussdMenu = ussdSessionRepository.findById(id).orElse(null);
+            if (ussdMenu != null) {
+                return ussdConverter.convertToUssdSessionDto(ussdMenu);
+            }
+            return null;
+
         }
 
-        public UssdMenu update(UssdSessionDto ussdSessionDto){
-            if(ussdSessionRepository.existsById(String.valueOf(ussdSessionDto))){
-                UssdMenu ussdMenu = ussdConverter.converterToUssdMenu(ussdSessionDto);
+        public UssdMenu update(UssdMenu ussdMenu){
+            if(ussdSessionRepository.existsById(ussdMenu.getId())){
+//                UssdMenu ussdMenu = ussdConverter.converterToUssdMenu(ussdSessionDto);
                 return ussdSessionRepository.save(ussdMenu);
             }
             else{
-                throw new IllegalArgumentException("A session must have an ud to be updated")
+                throw new IllegalArgumentException("A session must have an ud to be updated");
             }
 
         }
@@ -40,7 +45,7 @@ import org.springframework.stereotype.Service;
 //            }
 //            throw new IllegalArgumentException("A session must have an id to be updated");
 //        }
-//            public void delete(String id){
+            public void delete(String id){
                 ussdSessionRepository.deleteById(ussdSessionDto.getId());
             }
 
@@ -54,8 +59,3 @@ import org.springframework.stereotype.Service;
         }
     }
 
-
-
-
-
-}

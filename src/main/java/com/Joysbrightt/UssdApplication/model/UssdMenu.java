@@ -22,6 +22,16 @@ public class UssdMenu {
         @JsonProperty("menu_options")
         private List<UssdMenuOption> menuOptions;
 
+        public String previousMenuLevel;
+
+
         @JsonProperty("max_selections")
         private Integer maxSelections;
+        public String getPreviousMenuLevel(){
+                return previousMenuLevel;
+        }
+
+        public void setPreviousMenuLevel(String previousMenuLevel){
+                this. menuLevel = menuLevel;
+        }
     }

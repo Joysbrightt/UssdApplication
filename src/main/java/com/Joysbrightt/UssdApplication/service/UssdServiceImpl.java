@@ -7,6 +7,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class UssdServiceImpl implements UssdService {
     @Autowired
@@ -31,10 +35,19 @@ public class UssdServiceImpl implements UssdService {
         public String getMenu(String serviceCode) {
             UssdMenu ussdMenu = ussdMenuRepository.findByCode(serviceCode);
             if (ussdMenu != null) {
-                return ussdMenu.getMenu();
+                return ussdMenu.getMenuLevel();
             } else {
                 return "Invalid USSD code. Please try again.";
             }
+        }
+
+        public Map<String, UssdMenu> loadMenu(){
+        List<UssdMenu> allMenus = ussdMenuRepository.findAll();
+            Map<String, UssdMenu> menuMap = new HashMap<>();
+            for (UssdMenu ussdMenu : allMenus){
+                menuMap.put(ussdMenu.getMenuLevel(), ussdMenu);
+            }
+            return menuMap;
         }
     }
 
